@@ -363,15 +363,12 @@ local collectionSpeed = "x150"
 local isCollecting = false
 
 local speedMap = {
-    ["x50"] = 50, 
-    ["x75"] = 75, 	
+    ["x50"] = 50, 	
     ["x100"] = 100,	
     ["x150"] = 150,
-    ["x175"] = 175,
     ["x200"] = 200,	
     ["x220"] = 220,	
-    ["x250"] = 250,
-    ["x275"] = 275,	
+    ["x250"] = 250,	
     ["x300"] = 300	
 }
 
@@ -783,7 +780,7 @@ Tab:AddDropdown({
 Tab:AddDropdown({
     Name = "Select Speed",
     Default = "None",
-    Options = {"None","x50", "x75", "x100", "x150", "x175", "x200", "x220", "x250", "x275", "x300"},
+    Options = {"None","x50", "x100", "x150", "x200", "x220", "x250", "x300"},
     Callback = function(Value)
         SetCollectionSpeed(Value)
     end    
@@ -828,7 +825,7 @@ Tab:AddToggle({
 		getgenv().Hoop = Value
         while Hoop do
             HoopFarm()
-            task.wait(0.1)
+            task.wait()
         end
 	end    
 })
@@ -840,7 +837,7 @@ Tab:AddToggle({
 		getgenv().HoopV2 = Value
         while HoopV2 do
             HoopFarmV2()
-            task.wait(0.1)
+            task.wait()
         end
 	end    
 })
@@ -1027,7 +1024,7 @@ Tab:AddButton({
 
 local Tab = Window:MakeTab({
 	Name = "PC Exploits",
-	Icon = "rbxassetid://92103740798042",
+	Icon = "rbxassetid://115354074188367",
 	PremiumOnly = false
 })
 
@@ -1042,7 +1039,7 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
-    Name = "Auto Race - Script",  -- Nome do botão
+    Name = "Auto Race - Exploit",  -- Nome do botão
     Callback = function() 
         -- Quando o botão for pressionado, o script será executado
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CkVyros/Vyros-Hub/refs/heads/main/AutoRacePC.lua"))()
@@ -1054,7 +1051,7 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
-    Name = "Auto Farm - Script",  -- Nome do botão
+    Name = "Auto Farm - Exploit",  -- Nome do botão
     Callback = function() 
         -- Quando o botão for pressionado, o script será executado
         loadstring(game:HttpGet("https://raw.githubusercontent.com/CkVyros/Vyros-Hub/refs/heads/main/AutoFarmPC.lua"))()
@@ -1242,7 +1239,7 @@ local GravityTextbox = Tab:AddTextbox({
 
 local Tab = Window:MakeTab({
 	Name = "Credits",
-	Icon = "rbxassetid://96062201354965",
+	Icon = "rbxassetid://117609087755983",
 	PremiumOnly = false
 })
 
@@ -1271,7 +1268,7 @@ local Section = Tab:AddSection({
 	Name = "Collaborators"
 })
 
-Tab:AddParagraph("MY HONEY!","Collaboration By Vr_Clarkyy (@zClarkyy)")
+Tab:AddParagraph("MY HONEY","Collaboration By Vr_Clarkyy (@zClarkyy)")
 
 local Section = Tab:AddSection({
 	Name = "V - 1.6"
