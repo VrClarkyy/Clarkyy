@@ -509,7 +509,7 @@ local StatsSection = Tab:AddSection({
 
 local UserIDLabel = Tab:AddLabel("UserID: " .. game.Players.LocalPlayer.UserId)
 local StatusLabel = Tab:AddLabel("Status: Online")
-local KeyLabel = Tab:AddLabel("Key: Valid ✅")
+local KeyLabel = Tab:AddLabel("Premium Key: Valid ✅")
 
 local StatsSection = Tab:AddSection({
     Name = "Player Time"
@@ -797,7 +797,7 @@ Tab:AddToggle({
 
         while isCollecting do
             CollectOrbs()
-            wait(0.3) 
+            wait(0.4) 
         end
     end    
 })
@@ -827,7 +827,7 @@ Tab:AddToggle({
 		getgenv().Hoop = Value
         while Hoop do
             HoopFarm()
-            task.wait()
+            task.wait(0.1)
         end
 	end    
 })
@@ -839,7 +839,7 @@ Tab:AddToggle({
 		getgenv().HoopV2 = Value
         while HoopV2 do
             HoopFarmV2()
-            task.wait()
+            task.wait(0.1)
         end
 	end    
 })
@@ -1270,15 +1270,15 @@ local Section = Tab:AddSection({
 	Name = "Collaborators"
 })
 
-Tab:AddParagraph("MY HONEY!","Collaboration By Clarkyy (@zClarkyy)")
+Tab:AddParagraph("MY HONEY!","Collaboration By Vr_Clarkyy (@zClarkyy)")
 
 local Section = Tab:AddSection({
-	Name = "V - 1.5"
+	Name = "V - 1.6"
 })
 
 OrionLib:MakeNotification({
-	Name = "Vyros Hub Freemium",
-	Content = "Your Key Freemium Is Validated!",
+	Name = "Vyros Hub Premium",
+	Content = "Your Premium Key Is Validated!",
 	Image = "rbxassetid://101023107339989",
 	Time = 15
 })
@@ -1292,7 +1292,7 @@ OrionLib:MakeNotification({
 
 OrionLib:MakeNotification({
 	Name = "Script Version",
-	Content = "V - 1.5",
+	Content = "V - 1.6",
 	Image = "rbxassetid://83863323756908",
 	Time = 10
 })
