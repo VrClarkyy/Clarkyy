@@ -369,6 +369,7 @@ local speedMap = {
     ["x150"] = 150,
     ["x175"] = 175,
     ["x200"] = 200,	
+    ["x220"] = 220,	
     ["x250"] = 250,
     ["x275"] = 275,	
     ["x300"] = 300	
@@ -782,7 +783,7 @@ Tab:AddDropdown({
 Tab:AddDropdown({
     Name = "Select Speed",
     Default = "None",
-    Options = {"None","x50", "x75", "x100", "x150", "x175", "x200", "x250", "x275", "x300"},
+    Options = {"None","x50", "x75", "x100", "x150", "x175", "x200", "x220", "x250", "x275", "x300"},
     Callback = function(Value)
         SetCollectionSpeed(Value)
     end    
@@ -797,7 +798,7 @@ Tab:AddToggle({
 
         while isCollecting do
             CollectOrbs()
-            wait(0.4) 
+            wait(0.3) 
         end
     end    
 })
