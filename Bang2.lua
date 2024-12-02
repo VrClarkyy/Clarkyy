@@ -958,7 +958,7 @@ local Tab = Window:MakeTab({
 })
 
 local Section = Tab:AddSection({
-	Name = "Auto Race"
+	Name = "Auto Race V1"
 })
 
 local Dropdown = Tab:AddDropdown({
@@ -977,6 +977,10 @@ Tab:AddToggle({
     Callback = function(Value)
         toggleAutoRaces(Value)
     end
+})
+
+local Section = Tab:AddSection({
+	Name = "Auto Race V2"
 })
 
 Tab:AddToggle({
@@ -1235,6 +1239,33 @@ local GravityTextbox = Tab:AddTextbox({
             })
         end  
     end    
+})
+
+Tab:AddTextbox({
+    Name = "Teleport To Player",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        local TargetPlayer = Players:FindFirstChild(Value) -- Find the player by name
+        if TargetPlayer and TargetPlayer.Character and TargetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            -- Teleport the local player to the target player's position
+            LocalPlayer.Character.HumanoidRootPart.CFrame = TargetPlayer.Character.HumanoidRootPart.CFrame
+            OrionLib:MakeNotification({
+                Name = "Teleport Successful",
+                Content = "Teleported to " .. Value .. "!",
+                Image = "rbxassetid://71378523145158",
+                Time = 5
+            })
+        else
+            -- Notify if the player wasn't found
+            OrionLib:MakeNotification({
+                Name = "Teleport Failed",
+                Content = "Player not found or invalid!",
+                Image = "rbxassetid://89375684433942",
+                Time = 5
+            })
+        end
+    end
 })
 
 local Tab = Window:MakeTab({
