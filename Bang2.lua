@@ -558,7 +558,7 @@ local function UpdatePlayerStats()
     -- Atualizar os Labels com os valores
     UserIDLabel:Set("UserID: " .. userID)
     StatusLabel:Set("Status: " .. playerStatus)
-    KeyLabel:Set("Key: " .. playerKey)
+    KeyLabel:Set("Premium Key: " .. playerKey)
 end
 
 -- Função para atualizar o horário
