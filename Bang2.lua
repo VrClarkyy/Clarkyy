@@ -401,6 +401,17 @@ local function CollectOrbs()
     end
 end
 
+local function CollectGems()
+    -- Coleta de gemas específicas no mapa
+    for _, orb in pairs(game:GetService("Workspace").orbFolder.City:GetDescendants()) do
+        if orb.Name == "orbParticle" then
+            local orbParent = orb.Parent
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = orbParent.CFrame
+            wait(0.3 / speedMap[collectionSpeed])  -- Ajuste da velocidade de coleta
+        end
+    end
+end
+
 -- Função para ativar o "noPing"
 local function NoPing()
     while noPingEnabled do
@@ -769,7 +780,7 @@ Tab:AddDropdown({
 Tab:AddDropdown({
     Name = "Select Orb",
     Default = "None",
-    Options = {"None", "Red Orb", "Yellow Orb"},
+    Options = {"None", "Red Orb", "Yellow Orb", "Gems"},
     Callback = function(Value)
         SetOrb(Value)
     end    
@@ -793,7 +804,11 @@ Tab:AddToggle({
         print("Auto Farm Status: " .. (isCollecting and "Enabled" or "Disabled"))
 
         while isCollecting do
-            CollectOrbs()
+            if selectedOrb == "Gems" then
+                CollectGems()  -- Coleta de gemas se a opção selecionada for "Gems"
+            else
+                CollectOrbs()  -- Coleta de orbs
+            end
             wait(0.3) 
         end
     end    
@@ -1245,34 +1260,18 @@ Tab:AddTextbox({
     Default = "",
     TextDisappear = true,
     Callback = function(Value)
-        -- Busca o jogador pelo nome
-        local TargetPlayer = Players:FindFirstChild(Value)
+        local TargetPlayer = Players:FindFirstChild(Value) -- Find the player by name
         if TargetPlayer and TargetPlayer.Character and TargetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            -- Obtém o personagem local e o alvo
-            local LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-            local LocalRootPart = LocalCharacter:FindFirstChild("HumanoidRootPart")
-            local TargetRootPart = TargetPlayer.Character:FindFirstChild("HumanoidRootPart")
-
-            -- Confirma que ambos os HumanoidRootParts existem
-            if LocalRootPart and TargetRootPart then
-                -- Move o jogador local para o alvo
-                LocalRootPart.CFrame = TargetRootPart.CFrame + Vector3.new(0, 3, 0) -- Ajusta para evitar sobreposição
-                OrionLib:MakeNotification({
-                    Name = "Teleport Successful",
-                    Content = "Teleported to " .. Value .. "!",
-                    Image = "rbxassetid://71378523145158",
-                    Time = 5
-                })
-            else
-                OrionLib:MakeNotification({
-                    Name = "Teleport Failed",
-                    Content = "Player not found or invalid!"",
-                    Image = "rbxassetid://89375684433942",
-                    Time = 5
-                })
-            end
+            -- Teleport the local player to the target player's position
+            LocalPlayer.Character.HumanoidRootPart.CFrame = TargetPlayer.Character.HumanoidRootPart.CFrame
+            OrionLib:MakeNotification({
+                Name = "Teleport Successful",
+                Content = "Teleported to " .. Value .. "!",
+                Image = "rbxassetid://71378523145158",
+                Time = 5
+            })
         else
-            -- Notifica caso o jogador não seja encontrado
+            -- Notify if the player wasn't found
             OrionLib:MakeNotification({
                 Name = "Teleport Failed",
                 Content = "Player not found or invalid!",
