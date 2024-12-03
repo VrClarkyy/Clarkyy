@@ -487,34 +487,6 @@ local function toggleInfiniteJump()
     end
 end
 
--- Function Animation
-local GameAnimations = {
-    {"Ninja-Animation-Package", "rbxassetid://75"},  -- Substitua pelo ID real da animação Ninja
-    {"Mage-Animation-Package", "rbxassetid://63"},  -- Substitua pelo ID real da animação Mago
-    {"Wolf Sprint", "rbxassetid://3456789012"},  -- Substitua pelo ID real da animação Wolf
-    {"Speed Dash", "rbxassetid://4567890123"},  -- Substitua pelo ID real da animação Dash
-    {"Jump Attack", "rbxassetid://5678901234"},  -- Substitua pelo ID real da animação Jump
-}
-
-local DropdownOptions = {}
-for _, animation in ipairs(GameAnimations) do
-    table.insert(DropdownOptions, animation[1])  -- Nome da animação
-end
-
--- Função para tocar animações
-local function PlayAnimation(animationId)
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoid = character:WaitForChild("Humanoid")
-    
-    local animation = Instance.new("Animation")
-    animation.AnimationId = animationId
-    
-    local track = humanoid:LoadAnimation(animation)
-    track:Play()
-end
-
-
 
 
 --// Vyros Hub \\--
@@ -1308,25 +1280,6 @@ Tab:AddTextbox({
                 Time = 5
             })
         end
-    end
-})
-
-Tab:AddDropdown({
-    Name = "Select Animation Idle",
-    Default = DropdownOptions[1],  -- Definir o valor inicial
-    Options = DropdownOptions,
-    Callback = function(selectedAnimation)
-        -- Encontrar o ID correspondente à animação escolhida
-        local animationId = ""
-        for _, animation in ipairs(GameAnimations) do
-            if animation[1] == selectedAnimation then
-                animationId = animation[2]
-                break
-            end
-        end
-        
-        -- Executa a animação
-        PlayAnimation(animationId)
     end
 })
 
