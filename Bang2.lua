@@ -487,6 +487,33 @@ local function toggleInfiniteJump()
     end
 end
 
+-- Function Animation
+local GameAnimations = {
+    {"Ninja-Animation-Package", "rbxassetid://75"},  -- Substitua pelo ID real da animação Ninja
+    {"Mage-Animation-Package", "rbxassetid://63"},  -- Substitua pelo ID real da animação Mago
+    {"Wolf Sprint", "rbxassetid://3456789012"},  -- Substitua pelo ID real da animação Wolf
+    {"Speed Dash", "rbxassetid://4567890123"},  -- Substitua pelo ID real da animação Dash
+    {"Jump Attack", "rbxassetid://5678901234"},  -- Substitua pelo ID real da animação Jump
+}
+
+local DropdownOptions = {}
+for _, animation in ipairs(GameAnimations) do
+    table.insert(DropdownOptions, animation[1])  -- Nome da animação
+end
+
+-- Função para tocar animações
+local function PlayAnimation(animationId)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    local animation = Instance.new("Animation")
+    animation.AnimationId = animationId
+    
+    local track = humanoid:LoadAnimation(animation)
+    track:Play()
+end
+
 
 
 
@@ -1246,18 +1273,34 @@ Tab:AddTextbox({
     Default = "",
     TextDisappear = true,
     Callback = function(Value)
-        local TargetPlayer = Players:FindFirstChild(Value) -- Find the player by name
+        -- Busca o jogador pelo nome
+        local TargetPlayer = Players:FindFirstChild(Value)
         if TargetPlayer and TargetPlayer.Character and TargetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            -- Teleport the local player to the target player's position
-            LocalPlayer.Character.HumanoidRootPart.CFrame = TargetPlayer.Character.HumanoidRootPart.CFrame
-            OrionLib:MakeNotification({
-                Name = "Teleport Successful",
-                Content = "Teleported to " .. Value .. "!",
-                Image = "rbxassetid://71378523145158",
-                Time = 5
-            })
+            -- Obtém o personagem local e o alvo
+            local LocalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+            local LocalRootPart = LocalCharacter:FindFirstChild("HumanoidRootPart")
+            local TargetRootPart = TargetPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+            -- Confirma que ambos os HumanoidRootParts existem
+            if LocalRootPart and TargetRootPart then
+                -- Move o jogador local para o alvo
+                LocalRootPart.CFrame = TargetRootPart.CFrame + Vector3.new(0, 3, 0) -- Ajusta para evitar sobreposição
+                OrionLib:MakeNotification({
+                    Name = "Teleport Successful",
+                    Content = "Teleported to " .. Value .. "!",
+                    Image = "rbxassetid://71378523145158",
+                    Time = 5
+                })
+            else
+                OrionLib:MakeNotification({
+                    Name = "Teleport Failed",
+                    Content = "Player not found or invalid!"",
+                    Image = "rbxassetid://89375684433942",
+                    Time = 5
+                })
+            end
         else
-            -- Notify if the player wasn't found
+            -- Notifica caso o jogador não seja encontrado
             OrionLib:MakeNotification({
                 Name = "Teleport Failed",
                 Content = "Player not found or invalid!",
@@ -1265,6 +1308,25 @@ Tab:AddTextbox({
                 Time = 5
             })
         end
+    end
+})
+
+Tab:AddDropdown({
+    Name = "Select Animation Idle",
+    Default = DropdownOptions[1],  -- Definir o valor inicial
+    Options = DropdownOptions,
+    Callback = function(selectedAnimation)
+        -- Encontrar o ID correspondente à animação escolhida
+        local animationId = ""
+        for _, animation in ipairs(GameAnimations) do
+            if animation[1] == selectedAnimation then
+                animationId = animation[2]
+                break
+            end
+        end
+        
+        -- Executa a animação
+        PlayAnimation(animationId)
     end
 })
 
