@@ -814,7 +814,7 @@ Tab:AddToggle({
 
 Tab:AddToggle({
     Name = "No Ping",
-    Default = false,
+    Default = true,
     Callback = function(state)
         noPingEnabled = state  -- Atualiza o estado de noPing
         print("No Ping " .. (noPingEnabled and "Enabled" or "Disabled"))
