@@ -701,7 +701,7 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddButton({
-    Name = "Anti-Kick",
+    Name = "Anti Kick",
     Callback = function()
         AntiKick()
         print("Anti-kick activated!")
@@ -1035,7 +1035,7 @@ Tab:AddToggle({
 })
 
 local Section = Tab:AddSection({
-	Name = "Extremely Fast Races"
+	Name = "Auto Fill Race"
 })
 
 Tab:AddToggle({
@@ -1284,7 +1284,7 @@ local Section = Tab:AddSection({
 	Name = "Information"
 })
 
-Tab:AddParagraph("VYROS HUB","Script Made By Vyros_dev (@Alexg78909). Join Our Discord Server:")
+Tab:AddParagraph("VYROS HUB","Script Made by Vyros_dev (@Alexg78909). Join Our Discord Server:")
 
 Tab:AddButton({
     Name = "Click Here to Copy Discord Link",
