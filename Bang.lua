@@ -200,29 +200,31 @@ local function optimizeFpsPing()
         if v:IsA("BasePart") then
             -- Ajusta materiais para SmoothPlastic para todos os objetos
             v.Material = Enum.Material.SmoothPlastic
-            
-            -- Remove texturas aplicadas a partes
-            if v:FindFirstChildWhichIsA("Texture") then
-                for _, tex in pairs(v:GetChildren()) do
-                    if tex:IsA("Texture") or tex:IsA("Decal") then
-                        tex:Destroy()
-                    end
+
+            -- Define cor cinza uniforme para todas as partes
+            v.Color = Color3.new(0.5, 0.5, 0.5) -- Tom de cinza médio
+
+            -- Remove texturas e decalques
+            for _, child in pairs(v:GetChildren()) do
+                if child:IsA("Texture") or child:IsA("Decal") then
+                    child:Destroy()
                 end
             end
-            
+
             -- Remove sombras
             v.CastShadow = false
         elseif v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
-            -- Remove efeitos de partículas, feixes e trilhas
+            -- Remove partículas, feixes e trilhas
             v:Destroy()
         end
     end
-    
-    -- Remove iluminação volumétrica
+
+    -- Remove iluminação volumétrica e ajusta configurações de luz
     local Lighting = game:GetService("Lighting")
     Lighting.GlobalShadows = false
     Lighting.FogEnd = 1e10
     Lighting.Brightness = 2
+    Lighting.OutdoorAmbient = Color3.new(0.5, 0.5, 0.5) -- Ambiente uniforme cinza
 end
 
 -- Chama a função para otimizar gráficos
@@ -510,7 +512,7 @@ end
 
 
 --// Vyros Hub \\--
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/CkVyros/Vyros-Hub-UI/refs/heads/main/VyrosHubUI.lua')))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/VyrosDev/Vyros-Hub-UI/refs/heads/main/VyrosHubUI.lua')))()
 local Window = OrionLib:MakeWindow({Name = "Vyros Hub | Legends Of Speed", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 -- Criando a Tab Principal
