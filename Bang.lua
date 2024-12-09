@@ -197,14 +197,36 @@ end
 -- Function Low Graphics --
 local function optimizeFpsPing()
     for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
-        if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
+        if v:IsA("BasePart") then
+            -- Ajusta materiais para SmoothPlastic para todos os objetos
             v.Material = Enum.Material.SmoothPlastic
-            if v:IsA("Texture") then
-                v:Destroy()
+            
+            -- Remove texturas aplicadas a partes
+            if v:FindFirstChildWhichIsA("Texture") then
+                for _, tex in pairs(v:GetChildren()) do
+                    if tex:IsA("Texture") or tex:IsA("Decal") then
+                        tex:Destroy()
+                    end
+                end
             end
+            
+            -- Remove sombras
+            v.CastShadow = false
+        elseif v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
+            -- Remove efeitos de partículas, feixes e trilhas
+            v:Destroy()
         end
     end
+    
+    -- Remove iluminação volumétrica
+    local Lighting = game:GetService("Lighting")
+    Lighting.GlobalShadows = false
+    Lighting.FogEnd = 1e10
+    Lighting.Brightness = 2
 end
+
+-- Chama a função para otimizar gráficos
+optimizeFpsPing()
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -392,21 +414,10 @@ local function CollectOrbs()
     end
 
     local repetitions = speedMap[collectionSpeed] or 100 
-    print("Collecting " .. selectedOrb .. " in " .. selectedLocation .. " with " .. repetitions .. " repetitions.")
+    print("" .. selectedOrb .. "" .. selectedLocation .. "" .. repetitions .. "")
 
     for i = 1, repetitions do
         game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", selectedOrb, selectedLocation)
-    end
-end
-
-local function CollectGems()
-    -- Coleta de gemas específicas no mapa
-    for _, orb in pairs(game:GetService("Workspace").orbFolder.City:GetDescendants()) do
-        if orb.Name == "orbParticle" then
-            local orbParent = orb.Parent
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = orbParent.CFrame
-            wait(0.3 / speedMap[collectionSpeed])  -- Ajuste da velocidade de coleta
-        end
     end
 end
 
