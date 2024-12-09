@@ -204,9 +204,9 @@ local function optimizeFpsPing()
             -- Define cor cinza uniforme para todas as partes
             v.Color = Color3.new(0.5, 0.5, 0.5) -- Tom de cinza médio
 
-            -- Remove texturas e decalques
+            -- Remove texturas, decalques e surface appearances
             for _, child in pairs(v:GetChildren()) do
-                if child:IsA("Texture") or child:IsA("Decal") then
+                if child:IsA("Texture") or child:IsA("Decal") or child:IsA("SurfaceAppearance") then
                     child:Destroy()
                 end
             end
@@ -226,9 +226,6 @@ local function optimizeFpsPing()
     Lighting.Brightness = 2
     Lighting.OutdoorAmbient = Color3.new(0.5, 0.5, 0.5) -- Ambiente uniforme cinza
 end
-
--- Chama a função para otimizar gráficos
-optimizeFpsPing()
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -712,7 +709,7 @@ Tab:AddButton({
 })
 
 Tab:AddButton({
-    Name = "Low Graphics",
+    Name = "FPS Booster",
     Callback = function()
         optimizeFpsPing()  -- Chama a função de otimização
         print("Optimized graphics for better performance!")
