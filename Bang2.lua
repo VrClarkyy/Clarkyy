@@ -200,31 +200,29 @@ local function optimizeFpsPing()
         if v:IsA("BasePart") then
             -- Ajusta materiais para SmoothPlastic para todos os objetos
             v.Material = Enum.Material.SmoothPlastic
-
-            -- Define cor cinza uniforme para todas as partes
-            v.Color = Color3.new(0.5, 0.5, 0.5) -- Tom de cinza médio
-
-            -- Remove texturas, decalques e surface appearances
-            for _, child in pairs(v:GetChildren()) do
-                if child:IsA("Texture") or child:IsA("Decal") or child:IsA("SurfaceAppearance") then
-                    child:Destroy()
+            
+            -- Remove texturas aplicadas a partes
+            if v:FindFirstChildWhichIsA("Texture") then
+                for _, tex in pairs(v:GetChildren()) do
+                    if tex:IsA("Texture") or tex:IsA("Decal") then
+                        tex:Destroy()
+                    end
                 end
             end
-
+            
             -- Remove sombras
             v.CastShadow = false
         elseif v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
-            -- Remove partículas, feixes e trilhas
+            -- Remove efeitos de partículas, feixes e trilhas
             v:Destroy()
         end
     end
-
-    -- Remove iluminação volumétrica e ajusta configurações de luz
+    
+    -- Remove iluminação volumétrica
     local Lighting = game:GetService("Lighting")
     Lighting.GlobalShadows = false
     Lighting.FogEnd = 1e10
     Lighting.Brightness = 2
-    Lighting.OutdoorAmbient = Color3.new(0.5, 0.5, 0.5) -- Ambiente uniforme cinza
 end
 
 local Players = game:GetService("Players")
