@@ -413,7 +413,7 @@ local function CollectOrbs()
     end
 
     local repetitions = speedMap[collectionSpeed] or 100 
-    print("" .. selectedOrb .. "" .. selectedLocation .. "" .. repetitions .. "")
+    print("Collecting " .. selectedOrb .. "in " .. selectedLocation .. "with " .. repetitions .. "speed ")
 
     for i = 1, repetitions do
         game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", selectedOrb, selectedLocation)
@@ -1223,6 +1223,10 @@ Tab:AddButton({
             print("Infinite Jump Deactivated")
         end
     end    
+})
+
+local Section = Tab:AddSection({
+	Name = "Extra"
 })
 
 local GravityTextbox = Tab:AddTextbox({
