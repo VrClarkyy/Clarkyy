@@ -59,9 +59,7 @@ local function SelectCity(city)
     elseif city == "Magma City" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11051.4258, 216.940002, 4886.27832, 0.987576485, 3.03587235e-08, -0.157139242, -3.89276664e-08, 1, -5.14532452e-08, 0.157139242, 5.69310785e-08, 0.987576485)
     elseif city == "Legends Highway" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-13095.9746, 214.580338, 5895.57568, 0.999146283, 0.0376458429, -0.0170128513, -0.037201196, 0.99897629, 0.0257374309, 0.0179643426, -0.0250825603, 0.999523938)
-    elseif city == "Speed Jungle" then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15274.1699, 398.630157, 5572.59229, 0.975814402, -6.58048123e-08, 0.218600765, 4.79792952e-08, 1, 8.68520544e-08, -0.218600765, -7.42631769e-08, 0.975814402)		
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-13095.9746, 214.580338, 5895.57568, 0.999146283, 0.0376458429, -0.0170128513, -0.037201196, 0.99897629, 0.0257374309, 0.0179643426, -0.0250825603, 0.999523938)	
     end
 end
 
