@@ -1,3 +1,12 @@
+local gameID = game.GameId -- Obtém o Game ID do jogo atual
+
+if gameID == 3101667897 then
+    print("Script ativado no Legends of Speed!")
+    -- Código do seu script aqui
+else
+    print("Este script não é para este jogo!")
+end
+
 --// Variables \\--
 
 getgenv().HoopFarm = false
