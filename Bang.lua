@@ -60,6 +60,8 @@ local function SelectCity(city)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11051.4258, 216.940002, 4886.27832, 0.987576485, 3.03587235e-08, -0.157139242, -3.89276664e-08, 1, -5.14532452e-08, 0.157139242, 5.69310785e-08, 0.987576485)
     elseif city == "Legends Highway" then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-13095.9746, 214.580338, 5895.57568, 0.999146283, 0.0376458429, -0.0170128513, -0.037201196, 0.99897629, 0.0257374309, 0.0179643426, -0.0250825603, 0.999523938)
+    elseif city == "Speed Jungle" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-400.654541, 4.22662687, 375.005737, -0.258443952, 0, -0.966026306, 0, 1, 0, 0.966026306, 0, -0.258443952)		
     end
 end
 
@@ -742,7 +744,7 @@ local Section = Tab:AddSection({
 Tab:AddDropdown({
     Name = "Select City",
     Default = "None",
-    Options = {"None","Main City", "Snow City", "Magma City", "Legends Highway"},
+    Options = {"None","Main City", "Snow City", "Magma City", "Legends Highway", "Speed Jungle"},
     Callback = function(Value)
         SelectCity(Value)
     end    
@@ -807,10 +809,10 @@ Tab:AddDropdown({
 })
 
 -- Dropdown para selecionar o Orb
-Tab:AddDropdown({
+Tab:AddDropdown({.
     Name = "Select Orb",
     Default = "None",
-    Options = {"None", "Red Orb", "Yellow Orb"},
+    Options = {"None", "Red Orb", "Yellow Orb", "Gem"},
     Callback = function(Value)
         SetOrb(Value)
     end    
