@@ -742,7 +742,7 @@ local Section = Tab:AddSection({
 Tab:AddDropdown({
     Name = "Select City",
     Default = "None",
-    Options = {"None","Main City", "Snow City", "Magma City", "Legends Highway", "Speed Jungle"},
+    Options = {"None","Main City", "Snow City", "Magma City", "Legends Highway"},
     Callback = function(Value)
         SelectCity(Value)
     end    
@@ -810,7 +810,7 @@ Tab:AddDropdown({
 Tab:AddDropdown({.
     Name = "Select Orb",
     Default = "None",
-    Options = {"None", "Red Orb", "Yellow Orb", "Gem"},
+    Options = {"None", "Red Orb", "Yellow Orb"},
     Callback = function(Value)
         SetOrb(Value)
     end    
